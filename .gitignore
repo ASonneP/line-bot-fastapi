@@ -36,6 +36,7 @@ pip-wheel-metadata/
 *.pid
 
 # Pytest and testing
+.pytest_cache/
 .cache/
 .tox/
 .nox/
