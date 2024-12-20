@@ -1,0 +1,46 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Virtual environment
+env/
+venv/
+.venv/
+
+# Environment variables
+.env
+
+# Log files
+*.log
+
+# IDE/editor settings
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Dependencies
+*.egg-info/
+pip-wheel-metadata/
+*.egg
+*.whl
+
+# Uvicorn
+*.pid
+
+# Pytest and testing
+.cache/
+.tox/
+.nox/
+
+# Docker
+docker-compose.override.yml
+.env.docker
+*.pid
