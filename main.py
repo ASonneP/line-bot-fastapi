@@ -65,6 +65,45 @@ async def send_message(account: str, req: SendMessageRequest):
         return {"status": "success", "message": f"Message sent to {req.user_id}"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+    
+
+@app.get("/{account}/line/quota_usage")
+async def get_quota_usage(account: str):
+    if account not in HANDLERS:
+        raise HTTPException(status_code=404, detail="Account not found")
+
+    line_bot_api, _ = HANDLERS[account]
+    try:
+        quota = line_bot_api.get_message_quota()
+        return {"status": "success", "quota": quota}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/{account}/line/quota_consumption")
+async def get_quota_consumption(account: str):
+    if account not in HANDLERS:
+        raise HTTPException(status_code=404, detail="Account not found")
+    
+    line_bot_api, _ = HANDLERS[account]
+    try:
+        consumption = line_bot_api.get_message_quota_consumption()
+        return {"status": "success", "consumption": consumption}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/{account}/line/delivery_push")
+async def get_delivery_push(account: str, date: str):
+    if account not in HANDLERS:
+        raise HTTPException(status_code=404, detail="Account not found")
+
+    line_bot_api, _ = HANDLERS[account]
+    try:
+        response = line_bot_api.get_insight_message_delivery(date)
+        return {"status": "success", "delivery_push": response}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 
 # Define Handlers for Each Account
 def register_handlers(account: str):
